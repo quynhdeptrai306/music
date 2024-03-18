@@ -17,7 +17,16 @@
 const $= document.querySelector.bind(document)
 const $$= document.querySelectorAll.bind(document);
 
+const player = $('.player')
+const btnPlay=$('.btn-toggle-play')
+const heading =$('header h2')
+const cdthumb= $('.cd-thumb')
+const audio = $('#audio')
+const progress= $('#progress')
+
 const app={
+    currentindex: 0,
+    isPlaying: false,
     songs: [
         {
             name:'Thủy triều',
@@ -50,7 +59,13 @@ const app={
             image: './assets/img/phuongly.webp'
         }
     ],
-
+    defineProperties:function(){
+        Object.defineProperty(this, 'currentSong',{
+            get: function(){
+                return this.songs[this.currentindex]
+            }
+        })
+    },
     render: function(){
         const htmls =this.songs.map(song =>{
             return `
@@ -68,7 +83,70 @@ const app={
         });
         $('.playlist').innerHTML=htmls.join('')
     },
+    handleEvent: function(){
+        const _this = this;
+        const cdthumbAnimation= cdthumb.animate(
+            [
+                {transform:'rotate(306deg)'}
+            ],
+            {
+                duration:10000,
+                interations: Infinity
+            }
+        )
+        cdthumbAnimation.pause()
+        btnPlay.onclick=function(){
+            if(_this.isPlaying){
+                audio.pause();
+                cdthumbAnimation.pause();
+            }
+            else{
+                audio.play(); 
+                cdthumbAnimation.play();  
+            }
+            //xử lí play song
+        }
+        
+        //when playing song
+        audio.onplay=function(){
+            _this.isPlaying=true
+            player.classList.add('playing')
+        }
+        //when pause song
+        audio.onpause=function(){
+            _this.isPlaying=false
+            player.classList.remove('playing')
+        }
+        //xử lí progress
+        audio.ontimeupdate=function(){
+            if(audio.duration){
+                const progressPercent= Math.floor(audio.currentTime / audio.duration *100)
+                progress.value=progressPercent
+            }
+        } 
+
+        //khi change progress
+        progress.onchange=function(){
+            const seekTime=audio.duration/100 * progress.value
+            audio.currentTime=seekTime
+        }
+    }
+    ,
+    loadCurrentSong: function(){
+        heading.textContent =this.currentSong.name
+        cdthumb.style.backgroundImage= `url('${this.currentSong.image}')`
+        audio.src = this.currentSong.path
+    }
+    ,
     start: function(){
+
+        // load bai hat dau tien
+        
+
+        //ddinh nghia cho thuoc tinh
+        this.defineProperties();
+        this.loadCurrentSong();
+        this.handleEvent();
         this.render();
     }
 }
