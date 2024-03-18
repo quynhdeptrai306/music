@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music player</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="../clone_music/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="player">
+      <!-- Dashboard -->
+      <div class="btn-left">
+        <i class="bi bi-caret-left"></i>
+      </div>
+      <div class="dashboard show">
+        <!-- Menu Item -->
+        <div class="menu">
+          <i class="bi bi-list"></i>
+        </div>
+
+       
+        <div class="list"></div>
+        <!-- Header -->
+        <header>
+          <h4>Now playing:</h4>
+          <h2>String 57th & 9th</h2>
+        </header>
+    
+        <!-- CD -->
+        <div class="cd">
+          <div class="cd-thumb" style="background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg')">
+          </div>
+        </div>
+    
+        <!-- Control -->
+        <div class="control">
+          <div class="btn btn-repeat">
+            <i class="fas fa-redo"></i>
+          </div>
+          <div class="btn btn-prev">
+            <i class="fas fa-step-backward"></i>
+          </div>
+          <div class="btn btn-toggle-play">
+            <i class="fas fa-pause icon-pause"></i>
+            <i class="fas fa-play icon-play"></i>
+          </div>
+          <div class="btn btn-next">
+            <i class="fas fa-step-forward"></i>
+          </div>
+          <div class="btn btn-random">
+            <i class="fas fa-random"></i>
+          </div>
+          <div class="fas fa-volume">
+            <input id="volume" class="volume" type="range" value="100" >
+          </div>
+        </div>
+    
+        <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+    
+        <audio id="audio" src=""></audio>
+        
+      </div>
+      <!-- Playlist -->
+      <div class="playlist">
+      </div>
+
+      <div class="lyric">
+        <header>
+          <h4>Now playing:</h4>
+          <h2>String 57th & 9th</h2>
+        </header>
+        <div class="lyric-write">
+          <p>
+             Nhắm mắt lại, hôn vào tai
+            Nhớ em anh không thể nào cai
+            Cuốn lấy nhau như sóng dập dìu
+            Anh là gió, em là thủy triều
+            Bịt mắt em lại, ไม่มีได้
+            Thế đêm nay em đang cần ai?
+            Uống hết ly rượu đầy trên tay
+            Ta cứ như là người trên mây
+            Oh, anh không muốn đâu, anh không muốn đó là cơn mộng trong đêm
+            Oh, anh không muốn đâu, anh không muốn cứ phải ngóng trông dài thêm
+            Tình yêu nung nấu phải đành chôn giấu bao lâu anh đang tìm kiếm
+            Quyện vào lời ca, quyến rũ lên ngôi
+            Trao em tình yêu, trao đi hết luôn cho nàng
+            Chìm đắm say khung trời hai ta giữa chốn mơ màng
+            Mắt nhắm, tay đan, tan trong nỗi nhớ vô vàn
+            Nhớ em dù cho cạnh bên, anh lại càng yêu thêm
+            Á-a-a
+            M-m-m-màu mắt môi em, anh chìm sâu
+            Lắng nghe thêm khi ta chạm nhau
+            Vầng trăng ghé thăm, thủy triều lên
+            Hai ta ước đêm nay khó quên
+            รักนะเธอ, anh ngẩn ngơ
+            Khiến anh feeling như nhà thơ
+            Môi của em, mùi hương rất khác
+            Anh lại muốn hôn người thêm chốc lát
+            Anh không muốn đâu, anh không muốn đó là cơn mộng trong đêm
+            Oh, anh không muốn đâu, anh không muốn cứ phải ngóng trông dài thêm
+            Tình yêu nung nấu phải đành chôn giấu bao lâu anh đang tìm kiếm
+            Quyện vào lời ca, quyến rũ lên ngôi
+            Trao em tình yêu, trao đi hết luôn cho nàng
+            Chìm đắm say khung trời hai ta giữa chốn mơ màng
+            Mắt nhắm, tay đan, tan trong nỗi nhớ vô vàn
+            Nhớ em dù cho cạnh bên, anh lại càng yêu thêm
+            Trao em tình yêu, trao đi hết luôn cho nàng
+            Chìm đắm say khung trời hai ta giữa chốn mơ màng
+            Mắt nhắm, tay đan, tan trong nỗi nhớ vô vàn
+            Nhớ em dù cho cạnh bên, anh lại càng yêu thêm
+            Á-a-a
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="../clone_music/assets/js/app.js"></script>
+</body>
+</html>
+
+
+<!-- Design from: https://static.collectui.com/shots/3671744/musicloud-revolutionary-app-for-music-streaming-large -->
