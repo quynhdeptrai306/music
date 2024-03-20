@@ -23,40 +23,52 @@ const heading =$('header h2')
 const cdthumb= $('.cd-thumb')
 const audio = $('#audio')
 const progress= $('#progress')
+const btnNextSong=$('.btn-next')
+const btnPrevSong=$('.btn-prev')
+const btnRandom=$('.btn-random')
+const lyricsH2 = $('.lyric h2')
+const lyricsP= $('.lyric p')
 
 const app={
     currentindex: 0,
     isPlaying: false,
+    isRandom: false,
     songs: [
         {
             name:'Thủy triều',
             singer: 'Quang Hùng MasterD',
             path: './assets/music/ThuyTrieu-QuangHungMasterD-13749202.mp3',
-            image: './assets/img/thuytrieu.png'
+            image: './assets/img/thuytrieu.png',
+            lyric:'test lyric1'
+
         },
         {
             name:'Call Me' ,
             singer: 'Wren Evans',
             path: './assets/music/CallMe-WrenEvans-13081940.mp3',
-            image: './assets/img/call-me.webp'
+            image: './assets/img/call-me.webp',
+            lyric:'test lyric2'
         },
         {
             name:'Nàng thơ' ,
             singer: 'Hoàng Dũng',
             path: './assets/music/NangTho-HoangDung-6413381.mp3',
-            image: './assets/img/hoangdung.webp'
+            image: './assets/img/hoangdung.webp',
+            lyric:'test lyric3'
         },
         {
             name:'Open Your Eyes' ,
             singer: 'Mono',
             path: './assets/music/OpenYourEyes-MONOOnionn-12581748.mp3',
-            image: './assets/img/mono.webp'
+            image: './assets/img/mono.webp',
+            lyric:'test lyric4'
         },
         {
             name:'Sáng Mắt Chưa' ,
             singer: 'Trúc Nhân',
             path: './assets/music/SangMatChua-TrucNhan-6042213.mp3',
-            image: './assets/img/phuongly.webp'
+            image: './assets/img/phuongly.webp',
+            lyric:'test lyric5'
         }
     ],
     defineProperties:function(){
@@ -90,8 +102,8 @@ const app={
                 {transform:'rotate(306deg)'}
             ],
             {
-                duration:10000,
-                interations: Infinity
+                duration:15000,
+                iterations: Infinity
             }
         )
         cdthumbAnimation.pause()
@@ -130,19 +142,73 @@ const app={
             const seekTime=audio.duration/100 * progress.value
             audio.currentTime=seekTime
         }
+        //next song
+        btnNextSong.onclick=function(){
+            if(_this.isRandom){
+                _this.randomSong()
+            }
+            else{
+                _this.nextSong()
+            }
+            cdthumbAnimation.play();  
+        }
+        //prev song
+        btnPrevSong.onclick=function(){
+            if(_this.isRandom){
+                _this.randomSong()
+            }
+            else{
+                _this.prevSong()
+            }
+            cdthumbAnimation.play();  
+        }
+        btnRandom.onclick=function(){
+            _this.isRandom=!_this.isRandom
+           btnRandom.classList.toggle("active",_this.isRandom)
+        }
+        //Auto next song when ender
+        audio.onended=function(){
+            btnNextSong.click()
+        }
+        
     }
     ,
     loadCurrentSong: function(){
         heading.textContent =this.currentSong.name
         cdthumb.style.backgroundImage= `url('${this.currentSong.image}')`
-        audio.src = this.currentSong.path
-    }
-    ,
+        audio.src = this.currentSong.path;
+        lyricsH2.textContent=this.currentSong.name;
+        lyricsP.textContent=this.currentSong.lyric;
+
+    },
+    // next song is playing
+    nextSong: function(){
+        this.currentindex++;
+        if(this.currentindex >= this.songs.length){
+            this.currentindex = 0
+        }
+        this.loadCurrentSong();
+        audio.play();
+    },
+    prevSong: function(){
+        this.currentindex--;
+        if(this.currentindex < 0){
+            this.currentindex = this.songs.length -1
+        }
+        this.loadCurrentSong();
+        audio.play();
+    },
+    randomSong: function(){
+        let nextSong
+        do{
+            nextSong= Math.floor(Math.random()*this.songs.length)
+        }while(nextSong===this.currentindex)
+        this.currentindex = nextSong;
+        this.loadCurrentSong();
+        audio.play();
+    },
     start: function(){
-
-        // load bai hat dau tien
         
-
         //ddinh nghia cho thuoc tinh
         this.defineProperties();
         this.loadCurrentSong();
